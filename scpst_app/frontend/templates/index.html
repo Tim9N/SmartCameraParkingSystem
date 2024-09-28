@@ -14,7 +14,7 @@
   <!-- Container to hold both the image and the canvas -->
   <div class="container">
     <!-- Original image -->
-    <img id="license-plate-image" src="{{url_for('static', filename='images/Cars3.png')}}" alt="License Plate Image">
+    <img id="license-plate-image" src="{{image}}" alt="License Plate Image">
     <p id="model-path">{{url_for('static', filename='model/model.json')}}</p>
     <!-- Canvas to display the cropped license plate -->
     <canvas id="canvas"></canvas>
