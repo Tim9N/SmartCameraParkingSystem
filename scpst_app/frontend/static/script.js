@@ -78,6 +78,16 @@ async function detectAndCrop() {
     // Draw the cropped portion of the image on the canvas
     ctx.drawImage(img, scaledLeft, scaledTop, scaledBoxWidth, scaledBoxHeight, 0, 0, scaledBoxWidth, scaledBoxHeight);
     console.log('Cropped license plate drawn on canvas');
+
+    // save the cropped image to a file
+    // canvas.toBlob(function(blob) {
+    //   const url = URL.createObjectURL(blob);
+    //   const a = document.createElement('a');
+    //   a.href = url;
+    //   a.download = 'cropped_license_plate.png';
+    //   a.click();
+    // });
+    
   } else {
     console.error('No license plate detected');
   }
