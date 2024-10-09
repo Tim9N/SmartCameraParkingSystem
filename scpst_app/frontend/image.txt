@@ -1,1 +1,1 @@
-static/images/Cars2.png
+static/images/Cars7.png
