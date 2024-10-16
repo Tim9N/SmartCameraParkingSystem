@@ -2,3 +2,7 @@ flask
 selenium
 google-cloud-storage
 firebase-admin
+requests
+cv2
+subprocess
+picamera2
