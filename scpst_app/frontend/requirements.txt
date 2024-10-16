@@ -1,3 +1,4 @@
 flask
 selenium
-time
+google-cloud-storage
+firebase-admin
