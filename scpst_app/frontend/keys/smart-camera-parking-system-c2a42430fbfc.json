@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "smart-camera-parking-system",
+  "private_key_id": "c2a42430fbfc846554f701bffbaacb5492b14b89",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCQiMrsZF1QZoVP\nyELs4GZj3ImnME3g/Enq8VX7PHj4g9WRgRlue7gICcA6vSyjU3qHnk6/cGJt2IE6\ntr8j9LZeVAsyIYlmP1ieBUQBDP7PeNhUHA6hcmKIKh7/nJ5gfWWRTX8JV2smt6Ei\nuV+duIuiJsk5uPbKzo2XQw8h+0xkJXq8CFt/i4mU+KricBMbRfxaoTAndvN2FBtJ\nGxqXBEmAoDctVHUu55d3LoTcoDV/jRoiSGpqWVUwZB/ZLnsPlUzm4/y5LOt7lkdI\nQFiDC0UHtPYgJS7xsLiuYmQzOt8nDParKeadqMD9/9I/o/o8rLb6H2fw3nToWv+C\ne4ZPuznnAgMBAAECggEAALb7oKmMTCt+C8+yrJxgwDLwzJioPiaY1bjtSo9qGwCG\nAplBlSbRy/XafWkjkIhDyUiLCNaz3X260oLGU6MW6hyCL49+Dlrd1/Up3eEl1hVA\nfXhPvFEVPEsnWVrKgln3Wk5lLNvPL1Jb5YoQuqwb6pEOv5iKeFP5mMIC+8dNN2mQ\nqRr9NulbRdWSQrB1fyobFej0dCAO3hhA0jN9XVfpk2fyyGVq62IiHoMy/Jlhjfvh\njjEEZV9OUWEx7CuWgYT6oX5URSqyNNBMXg9WC5gi2bXbdY6VC5wYH7t+DvZfcXOh\nLaMFtJqAm1HZnFy9zPtvTB/Sr7VPCLb4RqvOP2z0IQKBgQDHFumAX5ABnyNd+OIx\ntiaGnmU/KVcwfYOLVAmkn3sqrO2Dd4q+M/wW33m1WGT5PkZ7v788mmVxLubb9kCU\nknCnESo8t/92q0mS5wK3iQaT4hQJsWOkIUlWTWasY8CLi6eegB+qBTxNPjL5Yq+d\nruepyU6Ph9weDAEKiA8ofZMhWQKBgQC52ZyQ9LZgRlCccQJiZi9kbcwogtVP3L2m\ntmG0f4xNWAXyNiuInkwtBZQysz/vrqPasKePspbDyVYS1YObcygv+rbxim7jCLA1\nopOZgdC1V58AhGyCWRtaCPzMPLiHyzAM65vs6BPc0TtxGR832zLUgJSXQ1lNskcM\niseZC2iNPwKBgQDBmmtZlhShLxMiiCvWsc6HLLNCl74c/oGUVRXHi/snReD27qHy\nUvU7fPiLPDl9E21RW+bpVS9+wGBp2O92S23XWV7ciwWXbfxvKcy/lDXcS4a24lUG\nQARkM4K784lDanyHKwsfuFWqu+iwEaK70WGg/40xEKoiYgQFLMio1GzmiQKBgEfc\nsiKGzSJK7g6fz/k2Y+rkXcXoWQ0JYLfe28bMbvbVK29trMWl1/SsrJIyJ23JTIha\nOGBjANLxvfuIXdw02fw7aJPbIGdfS6thkssPnCESoWO00LRSOjZFNWLPs9amJY1J\naUBguJVwvhhMS3rwoiXzFgGrRBO79KcP3n/6HlJHAoGAZBTCiIMcRxmBclSbnn0v\n+V3Nm7sqAK1g2ZmF/4JevkgFHIHir4jMyj4SbXSGgfXfh0hxprdK0jDXOsKguQ6C\niLOYpJEIgexF4UgBQXAzv3SawzMzuiYhk23fLzaLJCJIkhCI7HPGj68TL5uUVt+P\nhOQCHEML0qtxzJHdrjs5BXY=\n-----END PRIVATE KEY-----\n",
+  "client_email": "image-bucket-access@smart-camera-parking-system.iam.gserviceaccount.com",
+  "client_id": "117196179172374187546",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/image-bucket-access%40smart-camera-parking-system.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
