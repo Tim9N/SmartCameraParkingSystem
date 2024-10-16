@@ -25,6 +25,9 @@ def download_from_bucket(destination_blob_name, local_file_path):
 
     print(f"File {destination_blob_name} downloaded to {local_file_path}.")
 
+    #return the time the file was uploaded
+    return blob.time_created
+
 def delete_from_bucket(destination_blob_name):
     # Create a new blob and upload the file's content
     blob = bucket.blob(destination_blob_name)
