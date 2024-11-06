@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, render_template
+from flask import Flask, jsonify, request, render_template, session
 from selenium import webdriver
 #from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.firefox.service import Service
@@ -8,6 +8,8 @@ from time import sleep
 
 from imageAPI import cropImage, ocrImage
 from bucketAPI import download_from_bucket
+#from firestoreApi import addUser, updateUser, deleteUser, deleteAllUsers, getUserByLicensePlate, getUsers
+
 
 app = Flask(__name__)
 
@@ -28,12 +30,27 @@ bucketImagePath = "fromthepi.jpg"
 def home():
     return render_template('index.html')
 
+@app.route('/admin')
+def admin():
+    return render_template('admin.html')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        print(request.form)
+    return render_template('login.html')
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    if request.method == 'POST':
+        print(request.form)
+    return render_template('signup.html')
+
 # Call this function to load the license localization model
 @app.route('/model')
 def model():
     global imagePath
     download_from_bucket(bucketImagePath, imagePath)
-    sleep(2)
     return render_template('model.html', image=imagePath)
 
 # Call this function to run the license localization model
@@ -51,6 +68,29 @@ def run_model():
         # Set up the Chrome driver
         service = Service(GeckoDriverManager().install())
         driver = webdriver.Firefox(service=service, options=chrome_options)
+
+        # global imagePath
+        # download_from_bucket(bucketImagePath, imagePath)
+
+        # # importing PIL Module
+        # from PIL import Image
+        
+        # # open the original image
+        # original_img = Image.open(imagePath)
+        
+        # # Flip the original image vertically
+        # vertical_img = original_img.transpose(method=Image.FLIP_TOP_BOTTOM)
+        # #vertical_img.save(imagePath)
+
+        # # Flip the original image horizontally
+        # horizontal_img = vertical_img.transpose(method=Image.FLIP_LEFT_RIGHT)
+        # horizontal_img.save(imagePath)
+        
+        # # close all our files object
+        # original_img.close()
+        # vertical_img.close()
+        # horizontal_img.close()
+        # sleep(4)
 
         # Open the testing page
         driver.get('http://localhost:5000/model')
