@@ -9,7 +9,7 @@
 <body>
     <div class="container mt-3">
         <h1>SCPST Login</h1>
-        <form class="" method="POST" action="/login">
+        <form id="loginForm" class="" method="POST" action="/login">
             <div class="mb-3">
                 <label for="email">Email</label>
                 <input type="email" class="form-control" id="email" name="email" required>
@@ -20,10 +20,49 @@
             </div>
             <button type="submit" class="btn btn-primary">Login</button>
         </form>
+        <div class="row mt-3"></div>
+            <div class="col">
+                <button id="signupButton" class="btn btn-outline-primary">Signup</button>
+            </div>
+        </div>
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    <script>
+        document.getElementById('signupButton').addEventListener('click', function() {
+            window.location.href = '/signup';
+        });
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
 
+            const formData = new FormData(this);
+            const jsonData = {};
+
+            formData.forEach((value, key) => {
+                jsonData[key] = value;
+            });
+
+            console.log(jsonData)
+
+            fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(jsonData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                window.location.href = '/';
+                // Handle success
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                // Handle error
+            });
+        });
+    </script>
 </body>
 </html>

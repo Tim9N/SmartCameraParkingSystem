@@ -21,7 +21,7 @@ def getUserByLicensePlate(license_plate:str) -> dict:
     @param license_plate:str - The license plate of the user
     @return:dict - The user's information if found, None otherwise
     """
-    docs = database.where('licensePlate', '==', license_plate).get()
+    docs = database.where('license_plate', '==', license_plate).get()
     if docs:
         return docs[0].to_dict()
     else:
@@ -70,7 +70,16 @@ def updateUser(user):
         return doc_ref.id
     else:
         return None
-    
+
+def updateUserByLicensePlate(license_plate:str, user:dict):
+    """
+    Updates a user's information in the database by license plate.
+    """
+    docs = database.where('license_plate', '==', license_plate).get()
+    if docs:
+        doc_ref = docs[0].reference
+        doc_ref.update(user)  
+        return doc_ref.id
 
 def deleteUser(email:str):
     """

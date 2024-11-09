@@ -1,5 +1,7 @@
-class User:
-    def __init__(self, email, name=None, license_plate=None, credit_card=None, last_entry=None, last_exit=None, password=None):
+from flask_login import UserMixin
+
+class User(UserMixin):
+    def __init__(self, email, name=None, license_plate=None, credit_card=None, last_entry=None, last_exit=None, password=None, photo=None):
         self.email = email
         self.name = name
         self.license_plate = license_plate
@@ -7,6 +9,7 @@ class User:
         self.last_entry = last_entry
         self.last_exit = last_exit
         self.password = password
+        self.photo = photo
     
     def get_id(self):
         return self.email
@@ -20,7 +23,8 @@ class User:
             'credit_card': self.credit_card,
             'last_entry': self.last_entry,
             'last_exit': self.last_exit,
-            'password': self.password
+            'password': self.password,
+            'photo': self.photo
         }
 
     @staticmethod
@@ -33,5 +37,6 @@ class User:
             credit_card=data.get('credit_card'),
             last_entry=data.get('last_entry'),
             last_exit=data.get('last_exit'),
-            password=data.get('password')
+            password=data.get('password'),
+            photo=data.get('photo')
         )

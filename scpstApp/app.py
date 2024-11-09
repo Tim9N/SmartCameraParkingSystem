@@ -1,15 +1,16 @@
+# External imports
 from flask import Flask, jsonify, request, render_template, session, redirect, url_for
 from flask_cors import CORS
 from selenium import webdriver
-#from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.firefox.service import Service
-# from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 from time import sleep
-from flask_login import login_required, LoginManager, UserMixin, login_user, logout_user, current_user
+from flask_login import login_required, LoginManager, login_user, logout_user, current_user
+from datetime import datetime
 
+# Local imports
 from imageAPI import cropImage, ocrImage
-from bucketAPI import download_from_bucket
+from bucketAPI import download_from_bucket, get_blob_url
 from firestoreAPI import *
 from User import User
 
@@ -27,6 +28,7 @@ croppedImagePath = "static/cropped/cropped.png"
 global bucketImagePath
 bucketImagePath = "fromthepi.jpg"
 
+# Flask app setup
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # Set a secret key for session management
 login_manager = LoginManager()
@@ -43,14 +45,15 @@ def load_user(user_id):
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        username = request.form.get('username')
-        password = request.form.get('password')
+        data = request.json
+        username = data.get('username')
+        password = data.get('password')
         user = getUserByEmail(username)
         if user and user.password == password:
-            login_user(user)
-            return redirect(url_for('home'))
+            login_user(User.from_dict(user))
+            return jsonify({"message": "Login successful"}), 200
         else:
-            return 'Invalid credentials', 401
+            return jsonify({"message": "Invalid credentials"}), 401
     return render_template('login.html')
 
 @app.route('/logout')
@@ -62,7 +65,8 @@ def logout():
 @app.route('/')
 @login_required
 def home():
-    return render_template('index.html')
+    user = current_user
+    return render_template('index.html', user=user)
 
 @app.route('/admin')
 def admin():
@@ -80,11 +84,12 @@ def signup():
             'license_plate': user.get('license_plate'),
             'credit_card': data.get('credit_card'),
             'last_entry': user.get('last_entry'),
-            'last_exit': user.get('last_exit')
+            'last_exit': user.get('last_exit'),
+            'photo': user.get('photo')
         }
-        updateUser(userData)
-        login_user(userData)
-        return redirect(url_for('home'))
+        print(userData)
+        updateUserByLicensePlate(userData.get('license_plate'), userData)
+        return jsonify({"message": "Signup successful"}), 200
     return render_template('signup.html')
 
 # Call this function to load the license localization model
@@ -98,40 +103,15 @@ def model():
 @app.route('/runModel')
 def run_model():
     # try:
-        # Set up Chrome options for headless mode
+        # Set up Firefox options for headless mode
         chrome_options = webdriver.FirefoxOptions()
         chrome_options.add_argument('--headless=new')
         chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument('--disable-dev-shm-usage')
-        # chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
-        # chrome_options.add_experimental_option('useAutomationExtension', False)
 
-        # Set up the Chrome driver
+        # Set up the Firefox driver
         service = Service(GeckoDriverManager().install())
         driver = webdriver.Firefox(service=service, options=chrome_options)
-
-        # global imagePath
-        # download_from_bucket(bucketImagePath, imagePath)
-
-        # # importing PIL Module
-        # from PIL import Image
-        
-        # # open the original image
-        # original_img = Image.open(imagePath)
-        
-        # # Flip the original image vertically
-        # vertical_img = original_img.transpose(method=Image.FLIP_TOP_BOTTOM)
-        # #vertical_img.save(imagePath)
-
-        # # Flip the original image horizontally
-        # horizontal_img = vertical_img.transpose(method=Image.FLIP_LEFT_RIGHT)
-        # horizontal_img.save(imagePath)
-        
-        # # close all our files object
-        # original_img.close()
-        # vertical_img.close()
-        # horizontal_img.close()
-        # sleep(4)
 
         # Open the testing page
         driver.get('http://localhost:5000/model')
@@ -153,6 +133,24 @@ def run_model():
             print("Cropped Image")
             text = ocrImage(croppedImagePath)
             print("Text: ", text)
+            user = getUserByLicensePlate(text)
+            print("user var: ", user)
+            if user is None:
+                user  = {
+                    'email': 'blank',
+                    'name': 'blank',
+                    'license_plate': text,
+                    'password': 'blank',
+                    'credit_card': 'blank',
+                    'last_entry': datetime.now(),
+                    'last_exit': 'blank',
+                    'photo': get_blob_url(bucketImagePath)
+                }
+                addUser(user)
+            else:
+                user['last_exit'] = datetime.now()
+                updateUser(user)
+            
             return jsonify({"message": "Model page opened successfully", "coordinates": coordinates, "licensePlate": text}), 200
     # except Exception as e:
     #     return jsonify({"error": str(e)}), 501
