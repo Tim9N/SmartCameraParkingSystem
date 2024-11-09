@@ -15,14 +15,17 @@ from User import User
 
 
 # Global variables
+global imagePath
+imagePath = "static/images/fromthepi.png"
+
 global coordinates
 coordinates = None
-global imagePath
-imagePath = 'images/fromthepi.png'
+
 global croppedImagePath
-croppedImagePath = 'images/cropped.png'
+croppedImagePath = "static/cropped/cropped.png"
+
 global bucketImagePath
-bucketImagePath = 'fromthepi.jpg'
+bucketImagePath = "fromthepi.jpg"
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # Set a secret key for session management
