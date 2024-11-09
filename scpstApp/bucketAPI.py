@@ -28,6 +28,10 @@ def download_from_bucket(destination_blob_name, local_file_path):
     #return the time the file was uploaded
     return blob.time_created
 
+def get_blob_url(destination_blob_name):
+    blob = bucket.blob(destination_blob_name)
+    return blob.public_url
+
 def delete_from_bucket(destination_blob_name):
     # Create a new blob and upload the file's content
     blob = bucket.blob(destination_blob_name)

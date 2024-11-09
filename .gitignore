@@ -1,2 +1,7 @@
 # Ignore app folder
 scpstApp/venv/
+
+# Ignore images
+scpstApp/static/images/fromthepi.jpg
+scpstApp/static/cropped/cropped.png
+scpstApp/downloads

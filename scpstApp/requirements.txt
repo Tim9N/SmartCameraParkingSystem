@@ -5,3 +5,6 @@ google-cloud-storage
 paddleocr
 paddlepaddle
 opencv-python
+flask-cors
+flask-login
+firebase-admin
