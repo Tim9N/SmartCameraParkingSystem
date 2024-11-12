@@ -58,8 +58,8 @@
             <div class="col">
                 <div>
                     <h5>Last Visit</h5>
-                    <p>Time Enter: {{user.last_entry or 'N/A'}}</p>
-                    <p>Time Exit: {{user.last_exit or 'N/A'}}</p>
+                    <p>Time Enter: {{user.last_entry.strftime('%m/%d/%Y %I:%M %p') if user.last_entry != 'blank' else 'N/A'}}</p>
+                    <p>Time Exit: {{user.last_exit.strftime('%m/%d/%Y %I:%M %p') if user.last_exit != 'blank' else 'N/A'}}</p>
                     
                     <img src="{{url_for('static', filename='images/fromthepi.png')}}" alt="Last Entry Photo" class="img-fluid">
                 </div>
