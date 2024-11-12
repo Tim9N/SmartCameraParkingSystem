@@ -46,10 +46,11 @@ def load_user(user_id):
 def login():
     if request.method == 'POST':
         data = request.json
-        username = data.get('username')
+        email = data.get('email')
         password = data.get('password')
-        user = getUserByEmail(username)
-        if user and user.password == password:
+        user = getUserByEmail(email)
+        print("user var: ", user)
+        if user and user.get('password') == password:
             login_user(User.from_dict(user))
             return jsonify({"message": "Login successful"}), 200
         else:
@@ -105,7 +106,7 @@ def run_model():
     # try:
         # Set up Firefox options for headless mode
         chrome_options = webdriver.FirefoxOptions()
-        chrome_options.add_argument('--headless=new')
+        chrome_options.add_argument('--headless')
         chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument('--disable-dev-shm-usage')
 
@@ -148,7 +149,11 @@ def run_model():
                 }
                 addUser(user)
             else:
-                user['last_exit'] = datetime.now()
+                if user['last_exit'] != 'blank':
+                    user['last_entry'] = datetime.now()
+                    user['last_exit'] = 'blank'
+                else:
+                    user['last_exit'] = datetime.now()
                 updateUser(user)
             
             return jsonify({"message": "Model page opened successfully", "coordinates": coordinates, "licensePlate": text}), 200
@@ -163,6 +168,13 @@ def detect():
     coordinates = data
     print(coordinates)
     return jsonify({'message': 'Detection successful'}), 200
+
+
+# Get the user list
+@app.route('/users')
+def get_users():
+    users = getUsers()
+    return jsonify(users), 200
 
 if __name__ == '__main__':
     app.run(debug=True)
