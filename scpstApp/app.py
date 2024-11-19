@@ -13,6 +13,7 @@ from imageAPI import cropImage, ocrImage
 from bucketAPI import download_from_bucket, get_blob_url
 from firestoreAPI import *
 from User import User
+from licenseGetter import get_license_plate
 
 
 # Global variables
@@ -134,13 +135,15 @@ def run_model():
             print("Cropped Image")
             text = ocrImage(croppedImagePath)
             print("Text: ", text)
-            user = getUserByLicensePlate(text)
+            licensePlate = get_license_plate(text)
+            print("licensePlate: ", licensePlate)
+            user = getUserByLicensePlate(licensePlate)
             print("user var: ", user)
             if user is None:
                 user  = {
                     'email': 'blank',
                     'name': 'blank',
-                    'license_plate': text,
+                    'license_plate': licensePlate,
                     'password': 'blank',
                     'credit_card': 'blank',
                     'last_entry': datetime.now(),
