@@ -49,7 +49,7 @@
                         <p class="card-text">Name: {{user.name or 'N/A'}}</p>
                         <p class="card-text">Email: {{user.email or 'N/A'}}</p>
                         <p class="card-text">License Plate: {{user.license_plate or 'N/A'}}</p>
-                        <p class="card-text">Credit Card: **** **** **** {{user.credit_card or 'N/A'}}</p>
+                        <p class="card-text">Credit Card: **** **** **** {{ user.credit_card[-4:] if user.credit_card else 'N/A' }}</p>
                         <button class="btn btn-primary">Edit</button>
                     </div>
                 </div>

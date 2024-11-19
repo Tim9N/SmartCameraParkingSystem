@@ -107,9 +107,19 @@ function getUserList() {
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOMContentLoaded');
 
+    var modelRunning = false;
+
     // Get the run model button
-    const runModelBtn = document.getElementById('runModelBtn');
-    runModelBtn.addEventListener('click', runModel);
+    const toggleModelBtn = document.getElementById('toggleModelBtn');
+    toggleModelBtn.addEventListener('click', () => {
+        modelRunning = !modelRunning;
+        if (modelRunning) {
+            toggleModelBtn.innerText = 'Stop Model';
+        }
+        else {
+            toggleModelBtn.innerText = 'Start Model';
+        }
+    });
 
     // Function to update countdown timer
     function updateCountdown(endTime) {
@@ -137,7 +147,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Run model every 3 minutes
         setTimeout(() => {
-            runModel();
+            if (modelRunning) {
+                runModel();
+            }
             getUserList();
             clearInterval(countdownInterval);
             startPeriodicRuns(); // Restart the cycle
