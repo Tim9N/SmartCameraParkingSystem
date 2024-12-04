@@ -35,7 +35,7 @@
 
         <div class="row">
             <div class="col">
-                <h1>[App Name]</h1>
+                <h1>Buzz Park</h1>
                 <p class="text-muted">Welcome back {{user.name or 'N/A'}}!</p>
             </div>
             
@@ -61,7 +61,7 @@
                     <p>Time Enter: {{user.last_entry.strftime('%m/%d/%Y %I:%M %p') if user.last_entry != 'blank' else 'N/A'}}</p>
                     <p>Time Exit: {{user.last_exit.strftime('%m/%d/%Y %I:%M %p') if user.last_exit != 'blank' else 'N/A'}}</p>
                     
-                    <img src="{{url_for('static', filename='images/fromthepi.png')}}" alt="Last Entry Photo" class="img-fluid">
+                    <img src="{{url_for('static', filename='images/fromthepi.png')}}" alt="Last Entry Photo" class="img-fluid" style="transform: rotate(180deg);">
                 </div>
             </div>
         </div>
